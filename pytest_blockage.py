@@ -25,7 +25,12 @@ def pytest_sessionstart(session):
         http_whitelist = []
 
         def whitelisted(self, host, *args, **kwargs):
-            if isinstance(host, basestring) and host not in http_whitelist:
+            try:
+                string_type = basestring
+            except NameError:
+                # python3
+                string_type = str
+            if isinstance(host, string_type) and host not in http_whitelist:
                 logger.warning('Denied HTTP connection to: %s' % host)
                 raise MockHttpCall(host)
             logger.debug('Allowed HTTP connection to: %s' % host)
