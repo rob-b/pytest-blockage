@@ -16,7 +16,7 @@ class MockHttpCall(Exception):
 def pytest_addoption(parser):
     group = parser.getgroup('general')
     group.addoption('--blockage', action='store_true',
-                    help=u'Block network requests during test run')
+                    help='Block network requests during test run')
 
 
 def pytest_sessionstart(session):
