@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='pytest-blockage',
-    version='0.1',
+    version='0.2.0',
     description='Disable network requests during a test run.',
     long_description=open('README.rst').read(),
     license='BSD',
