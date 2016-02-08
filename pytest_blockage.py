@@ -56,15 +56,21 @@ def block_smtp(whitelist):
 
 
 def pytest_addoption(parser):
-    group = parser.getgroup('general')
+    group = parser.getgroup('blockage')
     group.addoption('--blockage', action='store_true',
                     help='Block network requests during test run')
-
+    group.addoption(
+        '--blockage-http-whitelist',
+        action='store',
+        help='Do not block HTTP requests to this comma separated list of '
+            'hostnames',
+        default=''
+    )
 
 def pytest_sessionstart(session):
     config = session.config
     if config.option.blockage:
-        http_whitelist = []
+        http_whitelist = config.option.blockage_http_whitelist.split(',')
         smtp_whitelist = []
 
         block_http(http_whitelist)
