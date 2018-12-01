@@ -1,11 +1,11 @@
 Changelog
 =========
 
-0.2.1 (unreleased)
+0.2.1 (2018-12-01)
 ------------------
 
-- Nothing changed yet.
-
+- HTTP whitelisting
+- SMTP whitelisting
 
 0.2.0 (2015-06-22)
 ------------------
