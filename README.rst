@@ -33,6 +33,6 @@ the argument names mentioned under usage::
 
     blockage=true
     blockage-http-whitelist=some_site
-    blickage-smtp-whitelist=fake_smtp
+    blockage-smtp-whitelist=fake_smtp
 
 
