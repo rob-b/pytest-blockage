@@ -18,14 +18,16 @@ class MockSmtpCall(Exception):
     pass
 
 
+def get_string_type():
+    try:
+        return basestring
+    except NameError:  # python3
+        return str
+
+
 def block_http(whitelist):
     def whitelisted(self, host, *args, **kwargs):
-        try:
-            string_type = basestring
-        except NameError:
-            # python3
-            string_type = str
-        if isinstance(host, string_type) and host not in whitelist:
+        if isinstance(host, get_string_type()) and host not in whitelist:
             logger.warning('Denied HTTP connection to: %s' % host)
             raise MockHttpCall(host)
         logger.debug('Allowed HTTP connection to: %s' % host)
@@ -41,7 +43,7 @@ def block_http(whitelist):
 
 def block_smtp(whitelist):
     def whitelisted(self, host, *args, **kwargs):
-        if isinstance(host, basestring) and host not in whitelist:
+        if isinstance(host, get_string_type()) and host not in whitelist:
             logger.warning('Denied SMTP connection to: %s' % host)
             raise MockSmtpCall(host)
         logger.debug('Allowed SMTP connection to: %s' % host)
