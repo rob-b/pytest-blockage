@@ -41,7 +41,12 @@ def block_http(whitelist):
 
 def block_smtp(whitelist):
     def whitelisted(self, host, *args, **kwargs):
-        if isinstance(host, basestring) and host not in whitelist:
+        try:
+            string_type = basestring
+        except NameError:
+            # python3
+            string_type = str
+        if isinstance(host, string_type) and host not in whitelist:
             logger.warning('Denied SMTP connection to: %s' % host)
             raise MockSmtpCall(host)
         logger.debug('Allowed SMTP connection to: %s' % host)
