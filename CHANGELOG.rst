@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2.2 (2019-02-13)
+------------------
+
+- FIX: SMTP whitelisting works with python3 as well
+
 0.2.1 (2018-12-01)
 ------------------
 
